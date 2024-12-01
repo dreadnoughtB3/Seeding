@@ -1,101 +1,84 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { PlusCircle, Search, Hash } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-white">
+      <header className="bg-gray-50 border-b">
+        <div className="container mx-auto px-4 py-4">
+          <h1 className="text-2xl font-bold text-gray-800">モヤモヤシェア</h1>
         </div>
+      </header>
+
+      <main className="container mx-auto px-4 py-8">
+        <section className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">あなたの「モヤモヤ」をシェアしよう</h2>
+          <p className="text-xl text-gray-600 mb-6">日々の悩みや困りごとを気軽に投稿。みんなで共有し、共感しあえる場所です。</p>
+          <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-white">
+            <PlusCircle className="mr-2 h-5 w-5" />
+            モヤモヤを投稿する
+          </Button>
+        </section>
+
+        <section className="mb-12">
+          <div className="flex gap-4 mb-6">
+            <Input placeholder="キーワードで検索" className="flex-grow" />
+            <Button>
+              <Search className="mr-2 h-5 w-5" />
+              検索
+            </Button>
+          </div>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {['仕事', '人間関係', '健康', '生活'].map((category) => (
+              <Button key={category} variant="outline" size="sm">
+                {category}
+              </Button>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {['#疲れた', '#悩み', '#ストレス', '#不安'].map((tag) => (
+              <Button key={tag} variant="ghost" size="sm" className="text-blue-500">
+                <Hash className="mr-1 h-4 w-4" />
+                {tag.slice(1)}
+              </Button>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">最新のモヤモヤ</h3>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <Card key={i}>
+                <CardContent className="p-4">
+                  <p className="text-gray-800 mb-4">仕事が忙しくて趣味の時間が取れない…</p>
+                  <div className="flex justify-between items-center text-sm text-gray-500">
+                    <span>2分前</span>
+                    <div className="flex items-center space-x-2">
+                      <Button variant="ghost" size="sm" className="text-blue-500">
+                        <Hash className="mr-1 h-4 w-4" />
+                        仕事
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-6">
+            <Button variant="outline">もっと見る</Button>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="bg-gray-50 mt-12 border-t">
+        <div className="container mx-auto px-4 py-6 text-center text-gray-600">
+          <p>&copy; 2023 モヤモヤシェア. All rights reserved.</p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
+
